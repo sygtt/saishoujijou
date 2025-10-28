@@ -51,10 +51,15 @@ fn main() {
     let mut current = "x"; // "x"と"y"のどっちを入力しているか管理
     let mut value;        // 配列に代入する値
 
-    while i < n {
+    loop {
         // メッセージ
-        print!("{}[{}] = ? ", current, i);
-        io::stdout().flush().unwrap();
+        if i == n {
+            println!("y[{}]の修正は必要ですか?", n-1);
+            println!("修正が必要ならばbと、不要ならばEnterを入力してください...");
+        } else {
+            print!("{}[{}] = ? ", current, i);
+            io::stdout().flush().unwrap();
+        }
 
         // 入力
         let mut input = String::new();
@@ -77,6 +82,9 @@ fn main() {
                 continue;
             }
         } else {
+            // ループを抜ける処理
+            if i == n { break; }
+
             // 型変換処理
             value = match input.trim().parse::<f64>() {
                 Ok(v) => v,
